@@ -5,8 +5,8 @@ import { cookies } from "next/headers";
 export default async function Home() {
   const cookieAccess = cookies().get("accessId");
   const posts = await db.post.findMany({
-    select: {
-      id: true,
+    orderBy: {
+      createdAt: "desc",
     },
   });
 
@@ -27,9 +27,9 @@ export default async function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center mx-4">
       {cookieAccess ? (
-        <div>
+        <div className="w-full">
           {posts.map((post) => (
-            <Post key={post.id} postId={post.id} />
+            <Post key={post.id} post={post} />
           ))}
         </div>
       ) : (
