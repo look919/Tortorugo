@@ -17,7 +17,9 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          <main className="max-w-2xl mx-auto bg-slate-900">{children}</main>
+        </body>
       </html>
     </ClerkProvider>
   );

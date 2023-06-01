@@ -17,7 +17,7 @@ model Post {
     createdAt DateTime @default(now())
 
     title     String
-    content   String @db.VarChar(3000)
+    content   String  @db.Text
 }
 
 model Comment {

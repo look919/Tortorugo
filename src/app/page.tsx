@@ -1,7 +1,14 @@
+import { Post } from "@/components/Post";
+import { db } from "@/lib/db";
 import { cookies } from "next/headers";
 
 export default async function Home() {
   const cookieAccess = cookies().get("accessId");
+  const posts = await db.post.findMany({
+    select: {
+      id: true,
+    },
+  });
 
   async function setCookieOnCorrectInput(data: FormData) {
     "use server";
@@ -15,12 +22,16 @@ export default async function Home() {
     }
   }
 
-  console.log("cookieAccess", cookieAccess);
+  console.log("cookieAccess", posts);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
+    <main className="flex min-h-screen flex-col items-center justify-center mx-4">
       {cookieAccess ? (
-        <div className="text-7xl">Jeszcze nie jest ready cnie</div>
+        <div>
+          {posts.map((post) => (
+            <Post key={post.id} postId={post.id} />
+          ))}
+        </div>
       ) : (
         <form action={setCookieOnCorrectInput as any} className="flex flex-col">
           <input
