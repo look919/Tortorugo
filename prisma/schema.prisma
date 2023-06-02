@@ -18,6 +18,7 @@ model Post {
 
     title     String
     content   String  @db.Text
+    categories Category[]
 }
 
 model Comment {
@@ -26,3 +27,9 @@ model Comment {
     createdAt DateTime @default(now())
 }
 
+model Category {
+    id        String  @id @default(cuid())
+    name      String
+    color     String
+    posts      Post[]
+}
