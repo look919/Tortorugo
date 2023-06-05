@@ -8,6 +8,9 @@ export default async function Home() {
     orderBy: {
       createdAt: "desc",
     },
+    include: {
+      categories: true,
+    },
   });
 
   async function setCookieOnCorrectInput(data: FormData) {
@@ -21,8 +24,6 @@ export default async function Home() {
       });
     }
   }
-
-  console.log("cookieAccess", posts);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center mx-4">

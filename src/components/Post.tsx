@@ -1,5 +1,5 @@
 "use client";
-import type { Post as IPost } from "@prisma/client";
+import type { Category, Post as IPost } from "@prisma/client";
 import { ContentRenderer } from "./ContentRenderer";
 import { useState } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
@@ -7,12 +7,15 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { twMerge } from "tailwind-merge";
 import "dayjs/locale/pl";
+import { Categories } from "./Categories";
 
 dayjs.extend(relativeTime);
 dayjs.locale("pl");
 
 type Props = {
-  post: IPost;
+  post: IPost & {
+    categories: Category[];
+  };
 };
 
 export const Post = ({ post }: Props) => {
@@ -40,6 +43,9 @@ export const Post = ({ post }: Props) => {
         )}
       </div>
       {!isEncapsulated && <ContentRenderer>{post.content}</ContentRenderer>}
+      {!isEncapsulated && post.categories.length > 0 && (
+        <Categories categories={post.categories} />
+      )}
     </section>
   );
 };
