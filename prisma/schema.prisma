@@ -31,5 +31,6 @@ model Category {
     id        String  @id @default(cuid())
     name      String
     color     String
+    filterable Boolean @default(true)
     posts     Post[]
 }

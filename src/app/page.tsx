@@ -1,15 +1,12 @@
-import { Post } from "@/components/Post";
 import { db } from "@/lib/db";
 import { cookies } from "next/headers";
+import { ClosedPost } from "./ClosedPost";
 
 export default async function Home() {
   const cookieAccess = cookies().get("accessId");
   const posts = await db.post.findMany({
     orderBy: {
       createdAt: "desc",
-    },
-    include: {
-      categories: true,
     },
   });
 
@@ -26,11 +23,11 @@ export default async function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center mx-4">
+    <section>
       {cookieAccess ? (
         <div className="w-full">
           {posts.map((post) => (
-            <Post key={post.id} post={post} />
+            <ClosedPost key={post.id} post={post} />
           ))}
         </div>
       ) : (
@@ -45,6 +42,6 @@ export default async function Home() {
           </button>
         </form>
       )}
-    </main>
+    </section>
   );
 }
