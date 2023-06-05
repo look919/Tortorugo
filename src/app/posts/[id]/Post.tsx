@@ -1,7 +1,7 @@
 import type { Category, Post as IPost } from "@prisma/client";
-import { ContentRenderer } from "../../../components/ContentRenderer";
-import { PostCreatedAt } from "../../../components/PostCreatedAt";
-import { Categories } from "../../../components/Categories";
+import { ContentRenderer } from "./ContentRenderer";
+import { Categories } from "./Categories";
+import { PostCreatedAt } from "@/components/PostCreatedAt";
 
 type Props = {
   post: IPost & {
