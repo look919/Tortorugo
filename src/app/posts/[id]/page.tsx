@@ -1,6 +1,5 @@
-import Link from 'next/link';
-import { db } from 'lib/db';
-import { Post } from './Post';
+import { Post } from '@components/Post';
+import { db } from '@lib/db';
 
 type Props = {
   params: { id: string };
@@ -18,12 +17,7 @@ const PostPage = async ({ params }: Props) => {
     return null;
   }
 
-  return (
-    <>
-      <Link href='/'>Go back</Link>
-      <Post post={post} />
-    </>
-  );
+  return <Post post={post} />;
 };
 
 export default PostPage;
