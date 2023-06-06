@@ -23,7 +23,7 @@ export default async function HomePage() {
   }
 
   return (
-    <section>
+    <section className='w-full'>
       {cookieAccess ? (
         <div className='w-full'>
           {posts.map(post => (

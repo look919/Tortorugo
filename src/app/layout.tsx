@@ -24,7 +24,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <NavItem text='Losowy' href='/random' />
               <NavItem text='Statystyczki' href='/stats' />
             </header>
-            <main className='flex flex-col mt-12 items-center justify-center'>{children}</main>
+            <main className='flex flex-col mt-12 w-full px-8 items-center justify-center'>{children}</main>
           </div>
         </body>
       </html>
