@@ -2,7 +2,7 @@ import { cookies } from 'next/headers';
 import { db } from '@lib/db';
 import { ClosedPost } from './ClosedPost';
 
-export default async function Home() {
+export default async function HomePage() {
   const cookieAccess = cookies().get('accessId');
   const posts = await db.post.findMany({
     orderBy: {
@@ -25,15 +25,15 @@ export default async function Home() {
   return (
     <section>
       {cookieAccess ? (
-        <div className="w-full">
+        <div className='w-full'>
           {posts.map(post => (
             <ClosedPost key={post.id} post={post} />
           ))}
         </div>
       ) : (
-        <form action={setCookieOnCorrectInput as any} className="flex flex-col">
-          <input name="key" placeholder="525" className="mb-2 p-1 bg-transparent border-b" />
-          <button type="submit" className="p-4 bg-cyan-600 rounded-sm">
+        <form action={setCookieOnCorrectInput as any} className='flex flex-col'>
+          <input name='key' placeholder='525' className='mb-2 p-1 bg-transparent border-b' />
+          <button type='submit' className='p-4 bg-cyan-600 rounded-sm'>
             Submit
           </button>
         </form>

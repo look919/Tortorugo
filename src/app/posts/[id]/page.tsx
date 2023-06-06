@@ -20,7 +20,7 @@ const PostPage = async ({ params }: Props) => {
 
   return (
     <>
-      <Link href="/">Go back</Link>
+      <Link href='/'>Go back</Link>
       <Post post={post} />
     </>
   );

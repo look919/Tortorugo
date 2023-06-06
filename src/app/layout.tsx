@@ -13,9 +13,9 @@ export const metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang='en'>
         <body className={inter.className}>
-          <main className="max-w-2xl mx-auto bg-slate-900 flex min-h-screen flex-col items-center">{children}</main>
+          <main className='max-w-2xl mx-auto bg-slate-900 flex min-h-screen flex-col items-center'>{children}</main>
         </body>
       </html>
     </ClerkProvider>
