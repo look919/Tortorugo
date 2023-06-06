@@ -1,6 +1,6 @@
-import { PostCreatedAt } from "@/components/PostCreatedAt";
-import type { Post } from "@prisma/client";
-import Link from "next/link";
+import Link from 'next/link';
+import { PostCreatedAt } from '@components/PostCreatedAt';
+import type { Post } from '@prisma/client';
 
 type Props = {
   post: Post;
@@ -9,9 +9,9 @@ type Props = {
 export const ClosedPost = ({ post }: Props) => {
   return (
     <Link href={`/posts/${post.id}`}>
-      <section className="bg-gradient-to-r from-gray-700 to-slate-800 rounded-lg w-full transition-all relative mb-8">
+      <section className="relative mb-8 w-full rounded-lg bg-gradient-to-r from-gray-700 to-slate-800 transition-all">
         <PostCreatedAt createdAt={post.createdAt} />
-        <div className="pt-2 pb-2 pr-2 mx-2 mb-6 text-lg flex items-center justify-between cursor-pointer">
+        <div className="mx-2 mb-6 flex cursor-pointer items-center justify-between pb-2 pr-2 pt-2 text-lg">
           <h4>{post.title}</h4>
         </div>
       </section>

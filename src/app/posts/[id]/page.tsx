@@ -1,7 +1,6 @@
-import React from "react";
-import Link from "next/link";
-import { db } from "@/lib/db";
-import { Post } from "@/app/posts/[id]/Post";
+import Link from 'next/link';
+import { db } from 'lib/db';
+import { Post } from './Post';
 
 type Props = {
   params: { id: string };
