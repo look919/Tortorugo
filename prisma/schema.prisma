@@ -12,14 +12,15 @@ datasource db {
 }
 
 model Post {
-    id        String  @id @default(cuid())    
-    authorId  String
-    createdAt DateTime @default(now())
+    id              String  @id @default(cuid())    
+    authorId        String
+    createdAt       DateTime @default(now())
 
-    title     String
-    content   String  @db.Text
-    code      String  
-    categories Category[]
+    title           String
+    content         String  @db.Text
+    decodedContent  String  @db.Text
+    encodedContent  String  @db.Text 
+    categories      Category[]
 }
 
 model Comment {
@@ -29,9 +30,9 @@ model Comment {
 }
 
 model Category {
-    id        String  @id @default(cuid())
-    name      String
-    color     String
-    filterable Boolean @default(true)
-    posts     Post[]
+    id          String  @id @default(cuid())
+    name        String
+    color       String
+    filterable  Boolean @default(true)
+    posts       Post[]
 }

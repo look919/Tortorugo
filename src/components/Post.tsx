@@ -1,10 +1,8 @@
 import Link from 'next/link';
-import { OneTimeKey } from 'encode-wir';
 import { auth } from '@clerk/nextjs';
 import { SignedOut } from '@clerk/nextjs/app-beta';
 import { PostCreatedAt } from '@components/PostCreatedAt';
 import { ArrowUturnLeftIcon } from '@heroicons/react/24/outline';
-import { encryptionMachine } from '@lib/encryptionMachine';
 import type { Category, Post as IPost } from '@prisma/client';
 import { Categories } from './Categories';
 import { ContentRenderer } from './ContentRenderer';
@@ -30,14 +28,12 @@ export const Post = ({ post }: Props) => {
       <section className='relative mb-8 w-full cursor-pointer rounded-lg bg-gradient-to-r from-gray-700 to-slate-800 transition-all'>
         <PostCreatedAt createdAt={post.createdAt} />
         <div className='mx-1 mb-6 flex cursor-pointer items-center justify-between border-b p-2 text-center text-lg mt-3'>
-          <h4>{userId ? encryptionMachine.decodeMessage(post.code as OneTimeKey, post.title) : post.title}</h4>
+          <h4>{post.title}</h4>
           <Link href='/'>
             <ArrowUturnLeftIcon className='h-6 w-6 text-gray-400 hover:text-gray-200' />
           </Link>
         </div>
-        <ContentRenderer>
-          {userId ? encryptionMachine.decodeMessage(post.code as OneTimeKey, post.content) : post.content}
-        </ContentRenderer>
+        <ContentRenderer>{userId ? post.decodedContent : post.encodedContent}</ContentRenderer>
         {post.categories.length > 0 && <Categories categories={post.categories} />}
       </section>
     </>
