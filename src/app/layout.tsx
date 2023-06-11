@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react';
 import { Poppins } from 'next/font/google';
+import Link from 'next/link';
 import { ClerkProvider } from '@clerk/nextjs';
-import { NavItem } from './NavItem';
+import { RandomPostLinkButton } from './RandomPostLinkButton';
 import { UserProfile } from './UserProfile';
 import './globals.css';
 
@@ -13,6 +14,8 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
+  const navItemClassName = 'w-full py-3 px-5 bg-slate-600 border-r last:border-r-0 text-center';
+
   return (
     <ClerkProvider>
       <html lang='en'>
@@ -23,9 +26,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <UserProfile />
             </div>
             <header className='flex w-full items-center justify-evenly'>
-              <NavItem text='Główna' href='/' />
-              <NavItem text='Losowy' href='/random' />
-              <NavItem text='Statystyczki' href='/stats' />
+              <Link href='/' className={navItemClassName}>
+                Główna
+              </Link>
+              <RandomPostLinkButton className={navItemClassName} />
+              <Link href='/stats' className={navItemClassName}>
+                Statystyczki
+              </Link>
             </header>
             <main className='flex flex-col mt-12 h-full w-full px-8 items-center justify-center'>{children}</main>
           </div>

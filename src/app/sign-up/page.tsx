@@ -1,4 +1,4 @@
-import { SignUp } from '@clerk/nextjs/app-beta/client';
+import { SignUp } from '@clerk/nextjs/app-beta';
 
 export default function SignInPage() {
   return (

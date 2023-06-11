@@ -1,7 +1,8 @@
-import { db } from 'lib/db';
-import { Post } from '@components/Post';
+'use server';
 
-const RandomPostPage = async () => {
+import { db } from '@lib/db';
+
+export const getRandomPost = async () => {
   const totalPosts = await db.post.count();
   const randomIndex = Math.floor(Math.random() * totalPosts);
 
@@ -15,11 +16,5 @@ const RandomPostPage = async () => {
     })
     .then(posts => posts[0]);
 
-  if (!randomPost) {
-    return null;
-  }
-
-  return <Post post={randomPost} />;
+  return randomPost;
 };
-
-export default RandomPostPage;

@@ -1,4 +1,4 @@
-import { UserButton, SignedIn, SignedOut } from '@clerk/nextjs/app-beta/client';
+import { UserButton, SignedIn, SignedOut } from '@clerk/nextjs/app-beta';
 import { SignInButton } from '@components/SignInButton';
 
 export const UserProfile = () => {
