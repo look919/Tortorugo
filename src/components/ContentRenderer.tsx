@@ -3,5 +3,7 @@ type Props = {
 };
 
 export const ContentRenderer = ({ children }: Props) => {
-  return <div className='px-2 pb-4 break-words' dangerouslySetInnerHTML={{ __html: children }} />;
+  return (
+    <article className='px-3 pb-4 text-sm text-stone-200 break-words' dangerouslySetInnerHTML={{ __html: children }} />
+  );
 };

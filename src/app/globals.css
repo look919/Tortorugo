@@ -18,13 +18,3 @@ body {
   background-color: black;
   color: white;
 }
-
-/* TODO: it will be wiser to move this code to component it self after I add creating posts functionality */
-.content {
-  font-size: 14px;
-  line-height: 20px;
-  color: #dbdbdb;
-  word-wrap: break-word;
-  overflow: hidden;
-  padding: 6px;
-}
