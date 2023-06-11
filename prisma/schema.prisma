@@ -17,7 +17,6 @@ model Post {
     createdAt       DateTime @default(now())
 
     title           String
-    content         String  @db.Text
     decodedContent  String  @db.Text
     encodedContent  String  @db.Text 
     categories      Category[]
