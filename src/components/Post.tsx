@@ -17,17 +17,29 @@ type Props = {
 };
 
 export const Post = ({ post }: Props) => {
+  const { userId } = auth();
+
   return (
-    <section className='relative mb-8 w-full cursor-pointer rounded-lg bg-gradient-to-r from-gray-700 to-slate-800 transition-all'>
-      <PostCreatedAt createdAt={post.createdAt} />
-      <div className='mx-1 mb-6 flex cursor-pointer items-center justify-between border-b p-2 text-center text-lg mt-3'>
-        <h4>{post.title}</h4>
-        <Link href='/'>
-          <ArrowUturnLeftIcon className='h-6 w-6 text-gray-400 hover:text-gray-200' />
-        </Link>
-      </div>
-      <ContentRenderer>{post.content}</ContentRenderer>
-      {post.categories.length > 0 && <Categories categories={post.categories} />}
-    </section>
+    <>
+      <SignedOut>
+        <div className='text-center mb-16 border p-4 rounded-sm flex flex-col items-center'>
+          <span className='text-sm mb-4'>Jak chcesz rozkodować ten bełkot, to się zaloguj, nie ma tak za darmo</span>
+          <SignInButton />
+        </div>
+      </SignedOut>
+      <section className='relative mb-8 w-full cursor-pointer rounded-lg bg-gradient-to-r from-gray-700 to-slate-800 transition-all'>
+        <PostCreatedAt createdAt={post.createdAt} />
+        <div className='mx-1 mb-6 flex cursor-pointer items-center justify-between border-b p-2 text-center text-lg mt-3'>
+          <h4>{userId ? encryptionMachine.decodeMessage(post.code as OneTimeKey, post.title) : post.title}</h4>
+          <Link href='/'>
+            <ArrowUturnLeftIcon className='h-6 w-6 text-gray-400 hover:text-gray-200' />
+          </Link>
+        </div>
+        <ContentRenderer>
+          {userId ? encryptionMachine.decodeMessage(post.code as OneTimeKey, post.content) : post.content}
+        </ContentRenderer>
+        {post.categories.length > 0 && <Categories categories={post.categories} />}
+      </section>
+    </>
   );
 };
