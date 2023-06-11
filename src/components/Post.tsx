@@ -1,9 +1,14 @@
 import Link from 'next/link';
+import { OneTimeKey } from 'encode-wir';
+import { auth } from '@clerk/nextjs';
+import { SignedOut } from '@clerk/nextjs/app-beta';
 import { PostCreatedAt } from '@components/PostCreatedAt';
 import { ArrowUturnLeftIcon } from '@heroicons/react/24/outline';
+import { encryptionMachine } from '@lib/encryptionMachine';
 import type { Category, Post as IPost } from '@prisma/client';
 import { Categories } from './Categories';
 import { ContentRenderer } from './ContentRenderer';
+import { SignInButton } from './SignInButton';
 
 type Props = {
   post: IPost & {
