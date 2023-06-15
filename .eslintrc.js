@@ -13,5 +13,6 @@ module.exports = {
     'no-param-reassign': [2, { props: true, ignorePropertyModificationsForRegex: ['Ref$'] }],
     'react/jsx-filename-extension': [2, { extensions: ['.tsx'] }], // reduce allowed extensions to typescript ones,
     'react/jsx-curly-brace-presence': [2, { props: 'never', children: 'never' }],
+    'import/no-extraneous-dependencies': 0,
   },
 };
