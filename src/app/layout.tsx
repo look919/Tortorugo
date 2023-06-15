@@ -9,8 +9,8 @@ import './globals.css';
 const font = Poppins({ subsets: ['latin-ext'], weight: ['100', '400', '700'] });
 
 export const metadata = {
-  title: 'Wirkus.pro',
-  description: '',
+  title: 'Tortorugo',
+  description: 'Przemyślenia pewnego turtla',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

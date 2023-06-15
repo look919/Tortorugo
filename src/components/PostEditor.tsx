@@ -6,6 +6,7 @@ import { FormPost } from '@actions/types';
 import { useUser } from '@clerk/nextjs';
 import { Post } from '@prisma/client';
 import { Editor as TinyMceEditor } from '@tinymce/tinymce-react';
+import { Input } from './Input';
 
 type TinyMCEEditor = {
   getContent: () => string;
@@ -40,14 +41,7 @@ export const PostEditor = ({ post, onSave }: Props) => {
 
   return (
     <>
-      <input
-        ref={titleInputRef}
-        type='text'
-        name='title'
-        className='mb-4 p-2 w-full outline-none text-center'
-        placeholder='Title'
-        defaultValue={post?.title || ''}
-      />
+      <Input inputRef={titleInputRef} name='title' placeholder='Title' defaultValue={post?.title || ''} />
       <TinyMceEditor
         apiKey={process.env.NEXT_PUBLIC_TINY_MCE_KEY}
         onInit={(evt, editor) => (editorRef.current = editor)}
