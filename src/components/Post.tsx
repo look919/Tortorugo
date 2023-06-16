@@ -20,7 +20,7 @@ export const Post = ({ post }: Props) => {
   return (
     <>
       <SignedOut>
-        <div className='text-center mb-16 border p-4 rounded-sm flex flex-col items-center'>
+        <div className='text-center mb-16 border p-4 rounded-sm flex mx-4 md:mx-0 flex-col items-center'>
           <span className='text-sm mb-4'>Jak chcesz rozkodować ten bełkot, to się zaloguj, nie ma tak za darmo</span>
           <SignInButton />
         </div>

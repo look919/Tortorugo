@@ -13,7 +13,7 @@ export const ClosedPost = ({ post, isIndexEven }: Props) => {
     <Link href={`/posts/${post.id}`} className='w-full'>
       <section
         className={twMerge(
-          'relative mb-8 w-full rounded-xl  from-gray-700 to-slate-800 transition-all',
+          'relative mb-8 w-full md:rounded-xl from-gray-700 to-slate-800 transition-all',
           isIndexEven ? 'bg-gradient-to-tr' : 'bg-gradient-to-bl',
         )}
       >
