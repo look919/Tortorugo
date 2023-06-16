@@ -26,10 +26,17 @@ export default async function HomePage({ searchParams }: Props) {
   return (
     <section className='w-full'>
       <FilterPosts categories={categories} />
-      <div className='w-full '>
-        {posts.map((post, postIndex) => (
-          <ClosedPost key={post.id} post={post} isIndexEven={postIndex % 2 === 0} />
-        ))}
+      <div className='w-full'>
+        {posts.length > 0 ? (
+          <>
+            <div className='border-b mb-8 -mx-8' />
+            {posts.map((post, postIndex) => (
+              <ClosedPost key={post.id} post={post} isIndexEven={postIndex % 2 === 0} />
+            ))}
+          </>
+        ) : (
+          <div className='w-full text-lg text-center'>Chuja tam, nic nie znalazło</div>
+        )}
       </div>
     </section>
   );

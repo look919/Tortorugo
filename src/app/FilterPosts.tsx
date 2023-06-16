@@ -68,7 +68,7 @@ export const FilterPosts = ({ categories }: Props) => {
   };
 
   return (
-    <div className='flex flex-col justify-center items-center mb-8 -mt-4'>
+    <div className='flex flex-col justify-center items-center mb-4 -mt-4'>
       <button
         onClick={() => setFiltersVisible(prevState => !prevState)}
         className='bg-sky-700 flex items-center py-1 px-4 w-fit text-sm rounded-lg'
@@ -90,7 +90,6 @@ export const FilterPosts = ({ categories }: Props) => {
             categories={categories}
           />
           <button className='bg-sky-700 py-1 px-4 mt-8 text-sm rounded-lg'>Filtruj</button>
-          <div className='border-b my-4' />
         </form>
       )}
     </div>

@@ -25,7 +25,9 @@ export const PostEditor = ({ post, onSave }: Props) => {
 
   const handleBlur = () => {
     if (!editorRef.current) return;
-    sessionStorage.setItem('tinymce', editorRef.current.getContent());
+    if (editorRef.current.getContent()) {
+      sessionStorage.setItem('tinymce', editorRef.current.getContent());
+    }
   };
 
   const handleSavePost = async () => {
@@ -40,6 +42,7 @@ export const PostEditor = ({ post, onSave }: Props) => {
       postId: post?.id,
     });
 
+    sessionStorage.removeItem('tinymce');
     router.push(`/posts/${postId}`);
   };
 
