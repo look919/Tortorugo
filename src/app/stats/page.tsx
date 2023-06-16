@@ -59,7 +59,7 @@ const StatsPage = async () => {
   for (let i = 0; i < posts.length; i++) {
     stats.averagePostLength += posts[i].decodedContent.length;
     stats.filteredCategoriesCount += posts[i].categories.filter(cat => !cat.filterable).length;
-    // stats.referencesCount += posts[i].referencesCount
+    stats.referencesCount += posts[i].referencesCount;
 
     if (posts[i].decodedContent.length > stats.maxPostLength.length) {
       stats.maxPostLength.length = posts[i].decodedContent.length;
@@ -88,7 +88,7 @@ const StatsPage = async () => {
       <Statistic name='Najkrótszy post' value={`${stats.minPostLength.title} - ${stats.minPostLength.length} znaków`} />
       <AverageTimeWaitingForPost averageTimeBetweenTwoPosts={stats.averageTimeBetweenTwoPosts} />
       <Statistic name='Kategorie z dupska, bo brakowało pomysłu' value={stats.filteredCategoriesCount} />
-      <Statistic name='Odwołania do popkultury' value={stats.referencesCount} />
+      <Statistic name='Mniej lub bardziej subtelne odwołania do kultury' value={stats.referencesCount} />
     </div>
   );
 };

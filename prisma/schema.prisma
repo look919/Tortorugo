@@ -20,6 +20,7 @@ model Post {
     decodedContent  String  @db.Text
     encodedContent  String  @db.Text 
     categories      Category[]
+    referencesCount Int     @default(0)
 }
 
 model Comment {
