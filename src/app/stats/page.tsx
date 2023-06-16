@@ -1,23 +1,7 @@
-import dayjs from 'dayjs';
-import 'dayjs/locale/pl';
-import relativeTime from 'dayjs/plugin/relativeTime';
 import { db } from '@lib/db';
 import { AverageTimeWaitingForPost } from './AverageTimeWaitingForPost';
+import { Statistic } from './Statistic';
 import { TimeFromFirstPostStatistic } from './TimeFromFirstPostStatistic';
-
-dayjs.extend(relativeTime);
-dayjs.locale('pl');
-
-type StatisticProps = {
-  name: string;
-  value: number | string;
-};
-const Statistic = ({ name, value }: StatisticProps) => (
-  <div className='flex items-start mb-2 last:mb-0'>
-    <span className='text-slate-400 mr-2 break-keep whitespace-nowrap'>{`${name}:`}</span>
-    <span className='text-white'>{value}</span>
-  </div>
-);
 
 type PostLength = {
   length: number;
@@ -80,7 +64,7 @@ const StatsPage = async () => {
 
   return (
     <div className='flex flex-col w-full px-2 items-start justify-start'>
-      <span className='text-xl mb-4'>No dobra co my tu mamy:</span>
+      <span className='md:text-xl text-base mb-4'>No dobra co my tu mamy:</span>
       <TimeFromFirstPostStatistic firstPostCreatedAt={posts[0].createdAt} />
       <Statistic name='Liczba postów' value={stats.postCount} />
       <Statistic name='Średnia długość posta' value={`${stats.averagePostLength} znaków`} />
