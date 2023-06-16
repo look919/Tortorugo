@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { FormPost } from '@actions/types';
 import { useUser } from '@clerk/nextjs';
@@ -20,18 +20,22 @@ type Props = {
 export const PostEditor = ({ post, onSave }: Props) => {
   const auth = useUser();
   const router = useRouter();
-
-  const titleInputRef = useRef<HTMLInputElement | null>(null);
+  const titleRef = useRef<HTMLInputElement | null>(null);
   const editorRef = useRef<TinyMCEEditor | null>(null);
 
+  const handleBlur = () => {
+    if (!editorRef.current) return;
+    sessionStorage.setItem('tinymce', editorRef.current.getContent());
+  };
+
   const handleSavePost = async () => {
-    if (!titleInputRef.current || !editorRef.current || !auth.user?.id) {
+    if (!titleRef.current || !editorRef.current?.getContent() || !auth.user?.id) {
       throw new Error('Missing required data');
     }
 
     const postId = await onSave({
       userId: auth.user.id,
-      title: titleInputRef.current.value,
+      title: titleRef.current.value,
       content: editorRef.current.getContent(),
       postId: post?.id,
     });
@@ -41,11 +45,12 @@ export const PostEditor = ({ post, onSave }: Props) => {
 
   return (
     <>
-      <Input inputRef={titleInputRef} name='title' placeholder='Title' defaultValue={post?.title || ''} />
+      <Input inputRef={titleRef} name='title' placeholder='Title' defaultValue={post?.title || ''} />
       <TinyMceEditor
         apiKey={process.env.NEXT_PUBLIC_TINY_MCE_KEY}
-        onInit={(evt, editor) => (editorRef.current = editor)}
-        initialValue={post?.decodedContent || '<p></p>'}
+        onInit={(_evt, editor) => (editorRef.current = editor)}
+        onBlur={handleBlur}
+        initialValue={post?.decodedContent || sessionStorage.getItem('tinymce') || ''}
         init={{
           height: 550,
           width: '100%',
