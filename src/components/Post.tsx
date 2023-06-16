@@ -25,9 +25,9 @@ export const Post = ({ post }: Props) => {
           <SignInButton />
         </div>
       </SignedOut>
-      <section className='relative w-full cursor-pointer md:rounded-lg bg-gradient-to-r from-gray-700 to-slate-800 transition-all'>
+      <section className='relative w-full md:rounded-lg bg-gradient-to-r from-gray-700 to-slate-800 transition-all'>
         <PostCreatedAt createdAt={post.createdAt} />
-        <div className='mx-1 mb-6 flex cursor-pointer items-center justify-between border-b p-2 text-center text-lg mt-3'>
+        <div className='mx-1 mb-6 flex items-center justify-between border-b p-2 text-center text-lg mt-3'>
           <h4>{post.title}</h4>
           <Link href='/'>
             <ArrowUturnLeftIcon className='h-6 w-6 text-gray-400 hover:text-gray-200' />

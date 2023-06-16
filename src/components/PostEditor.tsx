@@ -54,13 +54,9 @@ export const PostEditor = ({ post, onSave }: Props) => {
         init={{
           height: 550,
           width: '100%',
-          menubar: false,
           plugins: [],
           resize: false,
-          toolbar:
-            'undo redo | formatselect | ' +
-            'bold italic backcolor | alignleft aligncenter ' +
-            'alignright alignjustify',
+          toolbar: 'undo redo | ' + 'bold italic backcolor | alignleft aligncenter ' + 'alignright alignjustify',
 
           content_style:
             'body { font-family: Helvetica, sans-serif; font-size: 14px; background-color: #1a202c; color: #a1a1aa; }',
