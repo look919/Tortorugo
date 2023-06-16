@@ -34,7 +34,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 Statystyczki
               </Link>
             </header>
-            <main className='flex flex-col mt-12 h-full w-full px-8 items-center justify-center'>{children}</main>
+            <main className='flex flex-col mt-12 h-full w-full md:px-8  items-center justify-center'>{children}</main>
           </div>
         </body>
       </html>
