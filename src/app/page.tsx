@@ -2,8 +2,16 @@ import { db } from '@lib/db';
 import { ClosedPost } from './ClosedPost';
 import { FilterPosts } from './FilterPosts';
 
-export default async function HomePage() {
+type Props = {
+  searchParams: { categories: string[]; title: string };
+};
+
+export default async function HomePage({ searchParams }: Props) {
   const posts = await db.post.findMany({
+    where: {
+      title: searchParams.title ? { contains: searchParams.title } : undefined,
+      categories: searchParams.categories?.length ? { some: { id: { in: searchParams.categories } } } : undefined,
+    },
     orderBy: {
       createdAt: 'desc',
     },

@@ -60,16 +60,21 @@ const customStyles: StylesConfig<CategoryOption> = {
   }),
 };
 
+export const mapCategoriesToOptions = (categories: Category[]): CategoryOption[] =>
+  categories.map((category, categoryIndex) => ({
+    label: category.name,
+    value: category.id,
+    selectedColor: category.color,
+    optionColor: categoryIndex % 2 === 0 ? '#1e293b' : '#0f172a',
+  }));
+
 export const CategoriesSelect = ({ categories, ...props }: Props) => {
+  const options = mapCategoriesToOptions(categories);
+
   return (
     <ReactSelect
       isMulti
-      options={categories.map((category, index) => ({
-        label: category.name,
-        value: category.id,
-        selectedColor: category.color,
-        optionColor: index % 2 === 0 ? '#1e293b' : '#0f172a',
-      }))}
+      options={options}
       placeholder='Wybierz kategorie'
       noOptionsMessage={() => 'Nie ma takiej kategorii'}
       styles={customStyles}
