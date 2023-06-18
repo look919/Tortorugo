@@ -67,12 +67,12 @@ const StatsPage = async () => {
       <span className='md:text-xl text-base mb-4'>No dobra co my tu mamy:</span>
       <TimeFromFirstPostStatistic firstPostCreatedAt={posts[0].createdAt} />
       <Statistic name='Liczba postów' value={stats.postCount} />
-      <Statistic name='Średnia długość posta' value={`${stats.averagePostLength} znaków`} />
+      <Statistic name='Średnia długość posta' value={`${stats.averagePostLength.toFixed(1)} znaków`} />
       <Statistic name='Najdłuższy post' value={`${stats.maxPostLength.title} - ${stats.maxPostLength.length} znaków`} />
       <Statistic name='Najkrótszy post' value={`${stats.minPostLength.title} - ${stats.minPostLength.length} znaków`} />
       <AverageTimeWaitingForPost averageTimeBetweenTwoPosts={stats.averageTimeBetweenTwoPosts} />
       <Statistic name='Kategorie z dupska, bo brakowało pomysłu' value={stats.filteredCategoriesCount} />
-      <Statistic name='Mniej lub bardziej subtelne odwołania do kultury' value={stats.referencesCount} />
+      <Statistic name='Mniej lub bardziej subtelnie ukryte odwołania do kultury' value={stats.referencesCount} />
     </div>
   );
 };
