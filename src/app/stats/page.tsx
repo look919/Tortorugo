@@ -24,7 +24,7 @@ const StatsPage = async () => {
     },
   });
 
-  let stats: Stats = {
+  const stats: Stats = {
     postCount: posts.length,
     averagePostLength: 0,
     maxPostLength: {

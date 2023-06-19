@@ -14,5 +14,10 @@ module.exports = {
     'react/jsx-filename-extension': [2, { extensions: ['.tsx'] }], // reduce allowed extensions to typescript ones,
     'react/jsx-curly-brace-presence': [2, { props: 'never', children: 'never' }],
     'import/no-extraneous-dependencies': 0,
+    'prefer-const': 2,
+    '@typescript-eslint/no-implicit-any-catch': 1,
+    '@typescript-eslint/no-unsafe-call': 2,
+    '@typescript-eslint/no-unsafe-return': 2,
+    '@typescript-eslint/no-unnecessary-type-assertion': 1,
   },
 };

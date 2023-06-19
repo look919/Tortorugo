@@ -12,27 +12,27 @@
   "Map-Arrow": {
     "prefix": "map",
     "description": "🙈 dawaj array.map/arrow!",
-    "body": ["${1:collection}.map((${2:item}) => ${3:mappedItem})", "$0"]
+    "body": ["${1:collection}.map((${2:item}) => ${3:mappedItem});", "$0"]
   },
   "Map-Return": {
     "prefix": "map-fn",
     "description": "🙈 dawaj array.map/return!",
-    "body": ["${1:collection}.map((${2:item}) => {", "", "  return ${3:newAggr}", "})", "$0"]
+    "body": ["${1:collection}.map((${2:item}) => {", "", "  return ${3:newAggr}", "});", "$0"]
   },
   "Filter-Arrow": {
     "prefix": "fil",
     "description": "🙈 dawaj array.filter/arrow!",
-    "body": ["${1:collection}.filter((${2:item}) => ${3:mappedItem})", "$0"]
+    "body": ["${1:collection}.filter((${2:item}) => ${3:mappedItem});", "$0"]
   },
   "Filter-Return": {
     "prefix": "fil-fn",
     "description": "🙈 dawaj array.filter/return!",
-    "body": ["${1:collection}.fiter((${2:item}) => {", "", "  return ${3:newAggr}", "})", "$0"]
+    "body": ["${1:collection}.fiter((${2:item}) => {", "", "  return ${3:newAggr}", "});", "$0"]
   },
   "Reducer-Arrow": {
     "prefix": "red",
     "description": "🙈 dawaj array.reduce/arrow!",
-    "body": ["${1:collection}.reduce((${3:aggr}, ${2:item}) => ${5:newAggr}, ${4:initial})", "$0"]
+    "body": ["${1:collection}.reduce((${3:aggr}, ${2:item}) => ${5:newAggr}, ${4:initial});", "$0"]
   },
   "Reducer-Return": {
     "prefix": "red-fn",
