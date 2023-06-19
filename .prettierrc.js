@@ -11,13 +11,8 @@ module.exports = {
   bracketSameLine: false,
   arrowParens: 'avoid',
   endOfLine: 'lf',
-  importOrder: [
-    '^react$',
-    '^next',
-    '<THIRD_PARTY_MODULES>',
-    '^@(.*)$',
-    '^[./]',
-  ],
+  importOrder: ['^react$', '^next', '<THIRD_PARTY_MODULES>', '^@(.*)$', '^[./]'],
   importOrderSeparation: false,
   importOrderSortSpecifiers: false,
+  plugins: [require('prettier-plugin-tailwindcss')],
 };

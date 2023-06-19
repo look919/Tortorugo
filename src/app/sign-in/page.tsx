@@ -2,7 +2,7 @@ import { SignIn } from '@clerk/nextjs/app-beta';
 
 export default function SignInPage() {
   return (
-    <div className='flex my-auto h-[600px] mx-4 justify-center items-center'>
+    <div className='mx-4 my-auto flex h-[600px] items-center justify-center'>
       <SignIn signUpUrl='/sign-up' />
     </div>
   );

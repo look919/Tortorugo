@@ -13,12 +13,12 @@ export const ClosedPost = ({ post, isIndexEven }: Props) => {
     <Link href={`/posts/${post.id}`} className='w-full'>
       <section
         className={twMerge(
-          'relative mb-8 w-full md:rounded-xl from-gray-700 to-slate-800 transition-all',
+          'relative mb-8 w-full from-gray-700 to-slate-800 transition-all md:rounded-xl',
           isIndexEven ? 'bg-gradient-to-tr' : 'bg-gradient-to-bl',
         )}
       >
         <PostCreatedFormNow createdAt={post.createdAt} />
-        <h4 className='w-full mb-6 cursor-pointer text-center pb-1 pt-3.5 text-base'>{post.title}</h4>
+        <h4 className='mb-6 w-full cursor-pointer pb-1 pt-3.5 text-center text-base'>{post.title}</h4>
       </section>
     </Link>
   );

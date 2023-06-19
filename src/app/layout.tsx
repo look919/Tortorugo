@@ -20,8 +20,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <ClerkProvider>
       <html lang='en'>
         <body className={font.className}>
-          <div className='max-w-2xl mx-auto bg-slate-900 min-h-screen flex flex-col items-center'>
-            <h1 className='my-4 text-4xl text-center font-thin tracking-wider'>Tortorugo</h1>
+          <div className='mx-auto flex min-h-screen max-w-2xl flex-col items-center bg-slate-900'>
+            <h1 className='my-4 text-center text-4xl font-thin tracking-wider'>Tortorugo</h1>
             <div className='m-4 mt-0'>
               <UserProfile />
             </div>
@@ -34,7 +34,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 Statystyczki
               </Link>
             </header>
-            <main className='flex flex-col mt-12 h-full w-full md:px-8  items-center justify-center'>{children}</main>
+            <main className='mt-12 flex h-full w-full flex-col items-center  justify-center md:px-8'>{children}</main>
           </div>
         </body>
       </html>

@@ -13,7 +13,7 @@ type Props = {
 
 export const PostCreatedAt = ({ createdAt }: Props) => {
   return (
-    <div className='absolute -top-2 left-1/2 -translate-x-1/2 px-2 rounded-full text-center bg-green-700 text-xs'>
+    <div className='absolute -top-2 left-1/2 -translate-x-1/2 rounded-full bg-green-700 px-2 text-center text-xs'>
       {dayjs(createdAt).format('DD.MM.YYYY HH:mm')}
     </div>
   );
@@ -21,7 +21,7 @@ export const PostCreatedAt = ({ createdAt }: Props) => {
 
 export const PostCreatedFormNow = ({ createdAt }: Props) => {
   return (
-    <div className='absolute -top-2 left-1/2 -translate-x-1/2 px-2 rounded-full text-center bg-green-700 text-xs'>
+    <div className='absolute -top-2 left-1/2 -translate-x-1/2 rounded-full bg-green-700 px-2 text-center text-xs'>
       {dayjs(createdAt).fromNow()}
     </div>
   );

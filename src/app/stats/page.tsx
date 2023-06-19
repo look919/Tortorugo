@@ -63,8 +63,8 @@ const StatsPage = async () => {
   stats.averageTimeBetweenTwoPosts = stats.averageTimeBetweenTwoPosts / posts.length;
 
   return (
-    <div className='flex flex-col w-full px-2 items-start justify-start'>
-      <span className='md:text-xl text-base mb-4'>No dobra co my tu mamy:</span>
+    <div className='flex w-full flex-col items-start justify-start px-2'>
+      <span className='mb-4 text-base md:text-xl'>No dobra co my tu mamy:</span>
       <TimeFromFirstPostStatistic firstPostCreatedAt={posts[0].createdAt} />
       <Statistic name='Liczba postów' value={stats.postCount} />
       <Statistic name='Średnia długość posta' value={`${stats.averagePostLength.toFixed(1)} znaków`} />

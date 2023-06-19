@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export const SignInButton = () => {
   return (
-    <Link href='/sign-in' className='bg-sky-700 w-fit py-1 px-4 text-sm rounded-lg'>
+    <Link href='/sign-in' className='w-fit rounded-lg bg-sky-700 px-4 py-1 text-sm'>
       Zaloguj się
     </Link>
   );

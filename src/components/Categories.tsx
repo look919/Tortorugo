@@ -6,7 +6,7 @@ type Props = {
 
 export const Categories = ({ categories }: Props) => {
   return (
-    <div className='md:flex w-full md:items-center md:justify-evenly grid grid-cols-6 self-end overflow-hidden rounded-sm pt-2 text-center text-sm'>
+    <div className='grid w-full grid-cols-6 self-end overflow-hidden rounded-sm pt-2 text-center text-sm md:flex md:items-center md:justify-evenly'>
       {categories.map((category, index) => (
         <div
           className='w-full bg-cyan-600 py-1'

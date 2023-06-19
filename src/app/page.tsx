@@ -29,13 +29,13 @@ export default async function HomePage({ searchParams }: Props) {
       <div className='w-full'>
         {posts.length > 0 ? (
           <>
-            <div className='border-b mb-8 md:-mx-8' />
+            <div className='mb-8 border-b md:-mx-8' />
             {posts.map((post, postIndex) => (
               <ClosedPost key={post.id} post={post} isIndexEven={postIndex % 2 === 0} />
             ))}
           </>
         ) : (
-          <div className='w-full text-lg text-center'>Chuja tam, nic nie znalazło</div>
+          <div className='w-full text-center text-lg'>Chuja tam, nic nie znalazło</div>
         )}
       </div>
     </section>

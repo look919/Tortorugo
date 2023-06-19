@@ -68,10 +68,10 @@ export const FilterPosts = ({ categories }: Props) => {
   };
 
   return (
-    <div className='flex flex-col justify-center items-center mb-4 -mt-4'>
+    <div className='-mt-4 mb-4 flex flex-col items-center justify-center'>
       <button
         onClick={() => setFiltersVisible(prevState => !prevState)}
-        className='bg-sky-700 flex items-center py-1 px-4 w-fit text-sm rounded-lg'
+        className='flex w-fit items-center rounded-lg bg-sky-700 px-4 py-1 text-sm'
       >
         <FunnelIcon className='h-5 w-5' />
         <span className='mx-2'>{filtersVisible ? 'Schowaj filtry' : 'Poka filtry'}</span>
@@ -82,14 +82,14 @@ export const FilterPosts = ({ categories }: Props) => {
         )}
       </button>
       {filtersVisible && (
-        <form onSubmit={handleSubmit} className='mt-4 w-full flex flex-col'>
+        <form onSubmit={handleSubmit} className='mt-4 flex w-full flex-col'>
           <Input placeholder='Wyszukiwarka' name='title' value={filters.title} onChange={handleChangeName} />
           <CategoriesSelect
             value={filters.categories || []}
             onChange={handleCategoriesChange}
             categories={categories}
           />
-          <button className='bg-sky-700 py-1 px-4 mt-8 text-sm rounded-lg'>Filtruj</button>
+          <button className='mt-8 rounded-lg bg-sky-700 px-4 py-1 text-sm'>Filtruj</button>
         </form>
       )}
     </div>
