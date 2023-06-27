@@ -1,5 +1,6 @@
 .next/
 build/
+app/globals.css
 node_modules/
 internals/generators/
 internals/scripts/
