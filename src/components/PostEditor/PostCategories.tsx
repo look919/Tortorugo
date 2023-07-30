@@ -1,25 +1,18 @@
-import { Input } from '@components/Input';
-import React, { useEffect } from 'react';
+'use client';
 
-export type NewPostCategory =
-  | {
-      type: 'new';
-      fieldId: number;
-      name: string;
-      filterable: boolean;
-      color: string;
-    }
-  | {
-      type: 'existing';
-      fieldId: number;
-      id: string;
-    };
+import { CategoriesSelect, CategoryOption } from '@components/CategoriesSelect';
+import { MultiValue } from 'react-select';
+import { Input } from '@components/Input';
+import { Category } from '@prisma/client';
+import React from 'react';
+import { NewPostCategory } from '@actions/types';
 
 type PostCategoriesProps = {
-  categories: NewPostCategory[];
+  categories: Category[];
+  categoriesState: NewPostCategory[];
   currentCategory: number;
   setCurrentCategory: (category: number) => void;
-  setCategories: (categoriesState: NewPostCategory[]) => void;
+  setCategoriesState: (categoriesState: NewPostCategory[]) => void;
 };
 
 export const categoriesDefaultState = [1, 2, 3, 4, 5].map(
@@ -35,14 +28,27 @@ export const categoriesDefaultState = [1, 2, 3, 4, 5].map(
 
 export const PostCategories = ({
   categories,
+  categoriesState,
   currentCategory,
-  setCategories,
+  setCategoriesState,
   setCurrentCategory,
 }: PostCategoriesProps) => {
-  const category = categories[currentCategory - 1];
+  const category = categoriesState[currentCategory - 1];
+  const currentExistingCategory =
+    category.type === 'existing' ? categories.find(cat => cat.id === category.id) : undefined;
+  const currentExistingCategorySelectValue = currentExistingCategory
+    ? [
+        {
+          label: currentExistingCategory?.name || '',
+          value: currentExistingCategory?.id || '',
+          optionColor: currentExistingCategory?.color || '',
+          selectedColor: currentExistingCategory?.color || '#4B5563',
+        },
+      ]
+    : [];
 
   const handleChangeCategoryType = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newCategoriesState = categories.map(category => {
+    const newCategoriesState = categoriesState.map(category => {
       if (category.fieldId === currentCategory) {
         return event.target.value === 'new'
           ? ({
@@ -61,14 +67,14 @@ export const PostCategories = ({
       return category;
     });
 
-    setCategories(newCategoriesState);
+    setCategoriesState(newCategoriesState);
   };
 
   const handleNewCategoryChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     field: 'name' | 'filterable' | 'color',
   ) => {
-    const newCategoriesState = categories.map(category =>
+    const newCategoriesState = categoriesState.map(category =>
       category.fieldId === currentCategory && category.type === 'new'
         ? {
             ...category,
@@ -77,10 +83,21 @@ export const PostCategories = ({
         : category,
     );
 
-    setCategories(newCategoriesState);
+    setCategoriesState(newCategoriesState);
   };
 
-  console.log('category', category);
+  const handleExistingCategoryChange = (selectedCategory: MultiValue<CategoryOption>) => {
+    const newCategoriesState = categoriesState.map(category =>
+      category.fieldId === currentCategory && category.type === 'existing'
+        ? {
+            ...category,
+            id: selectedCategory[0].value,
+          }
+        : category,
+    );
+    setCategoriesState(newCategoriesState);
+  };
+
   return (
     <>
       <h2 className='text-center'>Categories:</h2>
@@ -135,23 +152,20 @@ export const PostCategories = ({
                 value={category.type === 'new' ? category.name : ''}
                 onChange={e => handleNewCategoryChange(e, 'name')}
                 placeholder='name'
-                name='name'
               />
               <Input
                 value={category.type === 'new' ? category.color : ''}
                 onChange={e => handleNewCategoryChange(e, 'color')}
                 placeholder='color'
-                name='color'
               />
             </div>
           ) : (
-            <div className='mt-4'>
-              <label className='block'>
-                Select existing category:
-                <select className='mt-1 w-full rounded-md border border-gray-300 px-3 py-2'>
-                  <option value=''>Select an existing category</option>
-                </select>
-              </label>
+            <div className='mt-4 flex w-full'>
+              <CategoriesSelect
+                categories={categories}
+                value={currentExistingCategorySelectValue}
+                onChange={handleExistingCategoryChange}
+              />
             </div>
           )}
         </div>

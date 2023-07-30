@@ -7,7 +7,7 @@ import { MultiValue } from 'react-select';
 import { Input } from '@components/Input';
 import { FunnelIcon, ChevronDoubleDownIcon, ChevronDoubleUpIcon } from '@heroicons/react/24/outline';
 import { Category } from '@prisma/client';
-import { CategoriesSelect, CategoryOption, mapCategoriesToOptions } from './CategoriesSelect';
+import { CategoriesSelect, CategoryOption, mapCategoriesToOptions } from '@components/CategoriesSelect';
 
 type Props = {
   categories: Category[];
@@ -89,7 +89,7 @@ export const FilterPosts = ({ categories }: Props) => {
       </button>
       {filtersVisible && (
         <form onSubmit={handleSubmit} className='mt-4 flex w-full flex-col'>
-          <Input placeholder='Wyszukiwarka' name='search' value={filters.search} onChange={handleChangeSearch} />
+          <Input placeholder='Wyszukiwarka' value={filters.search} onChange={handleChangeSearch} />
           <CategoriesSelect
             value={filters.categories || []}
             onChange={handleCategoriesChange}

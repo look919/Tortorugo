@@ -1,7 +1,6 @@
 import React from 'react';
 
 type Props = {
-  name: string;
   placeholder: string;
   inputRef?: React.Ref<HTMLInputElement>;
   value?: string;

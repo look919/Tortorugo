@@ -6,20 +6,17 @@ export type TinyMCEEditor = {
 };
 
 type TinyMceEditorProps = {
+  editorRef: React.MutableRefObject<TinyMCEEditor | null>;
   initialValue?: string;
 };
 
-export const TinyMceEditor = React.forwardRef<TinyMCEEditor, TinyMceEditorProps>(({ initialValue }, forwardedRef) => {
-  const editorRef = React.useRef<TinyMCEEditor | null>(null);
-
+export const TinyMceEditor = ({ initialValue, editorRef }: TinyMceEditorProps) => {
   const handleBlur = () => {
     if (!editorRef?.current) return;
     if (editorRef.current.getContent()) {
       sessionStorage.setItem('tinymce', editorRef.current.getContent());
     }
   };
-
-  React.useImperativeHandle(forwardedRef, () => editorRef.current as TinyMCEEditor);
 
   return (
     <Editor
@@ -39,4 +36,4 @@ export const TinyMceEditor = React.forwardRef<TinyMCEEditor, TinyMceEditorProps>
       }}
     />
   );
-});
+};

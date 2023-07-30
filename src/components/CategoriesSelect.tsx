@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactSelect, { ActionMeta, MultiValue, StylesConfig } from 'react-select';
 import { Category } from '@prisma/client';
+import { db } from '@lib/db';
 
 export type CategoryOption = {
   label: string;
@@ -38,6 +39,10 @@ const customStyles: StylesConfig<CategoryOption> = {
       backgroundColor: '#334155',
       color: '#020617',
     },
+  }),
+  container: provided => ({
+    ...provided,
+    width: '100%',
   }),
   menu: provided => ({
     ...provided,

@@ -1,19 +1,16 @@
-'use client';
-
 import { createPost } from '@actions/createPost';
-import { useUser } from '@clerk/nextjs';
 import { PostEditor } from '@components/PostEditor';
+import { db } from '@lib/db';
+import { NewPostGuard } from './NewPostGuard';
 
-export default function NewPostPage() {
-  const auth = useUser();
-
-  if (!auth.isSignedIn || (auth.isSignedIn && !auth.user.organizationMemberships.some(org => org.role === 'admin'))) {
-    return <div>Only admins can create posts</div>;
-  }
+export default async function NewPostPage() {
+  const categories = await db.category.findMany();
 
   return (
     <section className='flex w-full flex-col'>
-      <PostEditor onSave={createPost} />
+      <NewPostGuard>
+        <PostEditor state='creator' categories={categories} onSave={createPost} />
+      </NewPostGuard>
     </section>
   );
 }

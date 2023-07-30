@@ -1,17 +1,27 @@
 'use server';
 
-import { OneTimeKey } from 'encode-wir';
 import { db } from '@lib/db';
-import { encryptionMachine } from '@lib/encryptionMachine';
 import { FormPost } from './types';
 
 export const createPost = async (data: FormPost) => {
   const post = await db.post.create({
     data: {
       title: data.title,
-      authorId: data.userId,
+      authorId: 'test',
+      referencesCount: data.referencesCount,
       decodedContent: data.content,
-      encodedContent: encryptionMachine.encodeMessage(process.env.NEXT_PUBLIC_SECRET_KEY as OneTimeKey, data.content),
+      categories: {
+        connectOrCreate: data.newPostCategories!.map(category => ({
+          where: {
+            id: category.type === 'existing' ? category.id : '',
+          },
+          create: {
+            name: category.type === 'new' ? category.name : '',
+            color: category.type === 'new' ? category.color : '',
+            filterable: category.type === 'new' ? category.filterable : false,
+          },
+        })),
+      },
     },
   });
 
