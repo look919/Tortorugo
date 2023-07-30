@@ -48,23 +48,23 @@ export const PostCategories = ({
     : [];
 
   const handleChangeCategoryType = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newCategoriesState = categoriesState.map(category => {
-      if (category.fieldId === currentCategory) {
+    const newCategoriesState = categoriesState.map(categoryState => {
+      if (categoryState.fieldId === currentCategory) {
         return event.target.value === 'new'
           ? ({
-              ...category,
+              ...categoryState,
               type: 'new',
               name: '',
               color: '',
               filterable: false,
             } as const)
           : ({
-              ...category,
+              ...categoryState,
               type: 'existing',
               id: '',
             } as const);
       }
-      return category;
+      return categoryState;
     });
 
     setCategoriesState(newCategoriesState);
@@ -74,26 +74,26 @@ export const PostCategories = ({
     event: React.ChangeEvent<HTMLInputElement>,
     field: 'name' | 'filterable' | 'color',
   ) => {
-    const newCategoriesState = categoriesState.map(category =>
-      category.fieldId === currentCategory && category.type === 'new'
+    const newCategoriesState = categoriesState.map(categoryState =>
+      categoryState.fieldId === currentCategory && categoryState.type === 'new'
         ? {
-            ...category,
+            ...categoryState,
             [field]: field === 'filterable' ? event.target.checked : event.target.value,
           }
-        : category,
+        : categoryState,
     );
 
     setCategoriesState(newCategoriesState);
   };
 
   const handleExistingCategoryChange = (selectedCategory: MultiValue<CategoryOption>) => {
-    const newCategoriesState = categoriesState.map(category =>
-      category.fieldId === currentCategory && category.type === 'existing'
+    const newCategoriesState = categoriesState.map(categoryState =>
+      categoryState.fieldId === currentCategory && categoryState.type === 'existing'
         ? {
-            ...category,
+            ...categoryState,
             id: selectedCategory[0].value,
           }
-        : category,
+        : categoryState,
     );
     setCategoriesState(newCategoriesState);
   };
@@ -102,13 +102,13 @@ export const PostCategories = ({
     <>
       <h2 className='text-center'>Categories:</h2>
       <div className='my-8 flex justify-evenly'>
-        {categoriesDefaultState.map(category => (
+        {categoriesDefaultState.map(defaultCategory => (
           <button
-            key={category.fieldId}
-            onClick={() => setCurrentCategory(category.fieldId)}
-            className={`mx-2 w-16 py-1 ${currentCategory === category.fieldId ? 'bg-sky-700' : 'bg-sky-500'}`}
+            key={defaultCategory.fieldId}
+            onClick={() => setCurrentCategory(defaultCategory.fieldId)}
+            className={`mx-2 w-16 py-1 ${currentCategory === defaultCategory.fieldId ? 'bg-sky-700' : 'bg-sky-500'}`}
           >
-            {category.fieldId}
+            {defaultCategory.fieldId}
           </button>
         ))}
       </div>
