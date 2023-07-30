@@ -14,16 +14,44 @@ type Props = {
 };
 
 type Filters = {
-  title: string;
+  search: string;
   categories?: MultiValue<CategoryOption>;
 };
 
+const useFilters = (categories: Category[]) => {
+  const searchParams = useSearchParams();
+
+  const [filters, setFilters] = useState<Filters>({
+    search: '',
+  });
+
+  useEffect(() => {
+    const searchParamsCategories = searchParams.get('categories')
+      ? mapCategoriesToOptions(categories.filter(cat => searchParams.get('categories')?.includes(cat.id)))
+      : [];
+    setFilters({
+      search: searchParams.get('search') || '',
+      categories: searchParamsCategories,
+    });
+  }, [searchParams, categories]);
+
+  const handleChangeSearch = (event: ChangeEvent<HTMLInputElement>) => {
+    setFilters({ ...filters, search: event.target.value });
+  };
+
+  const handleCategoriesChange = (selectedCategories: MultiValue<CategoryOption>) => {
+    setFilters({ ...filters, categories: selectedCategories });
+  };
+
+  return { filters, handleChangeSearch, handleCategoriesChange };
+};
+
 const createQueryString = (filters: Filters) => {
-  const { title, categories } = filters;
+  const { search, categories } = filters;
   const queryObject: { [key: string]: string | string[] } = {};
 
-  if (title) {
-    queryObject.title = title;
+  if (search) {
+    queryObject.search = search;
   }
 
   if (categories) {
@@ -37,30 +65,8 @@ const iconClassName = 'h-5 w-5';
 
 export const FilterPosts = ({ categories }: Props) => {
   const router = useRouter();
-  const searchParams = useSearchParams();
-
   const [filtersVisible, setFiltersVisible] = useState(false);
-  const [filters, setFilters] = useState<Filters>({
-    title: '',
-  });
-
-  useEffect(() => {
-    const searchParamsCategories = searchParams.get('categories')
-      ? mapCategoriesToOptions(categories.filter(cat => searchParams.get('categories')?.includes(cat.id)))
-      : [];
-    setFilters({
-      title: searchParams.get('title') || '',
-      categories: searchParamsCategories,
-    });
-  }, [searchParams, categories]);
-
-  const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => {
-    setFilters({ ...filters, title: event.target.value });
-  };
-
-  const handleCategoriesChange = (selectedCategories: MultiValue<CategoryOption>) => {
-    setFilters({ ...filters, categories: selectedCategories });
-  };
+  const { filters, handleChangeSearch, handleCategoriesChange } = useFilters(categories);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -83,7 +89,7 @@ export const FilterPosts = ({ categories }: Props) => {
       </button>
       {filtersVisible && (
         <form onSubmit={handleSubmit} className='mt-4 flex w-full flex-col'>
-          <Input placeholder='Wyszukiwarka' name='title' value={filters.title} onChange={handleChangeName} />
+          <Input placeholder='Wyszukiwarka' name='search' value={filters.search} onChange={handleChangeSearch} />
           <CategoriesSelect
             value={filters.categories || []}
             onChange={handleCategoriesChange}

@@ -22,7 +22,7 @@
     "encode-wir": "^1.0.4",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.4",
-    "next": "^13.4.5-canary.12",
+    "next": "13.4.13-canary.6",
     "postcss": "8.4.24",
     "query-string": "^8.1.0",
     "react": "18.2.0",

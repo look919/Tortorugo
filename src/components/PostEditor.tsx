@@ -53,7 +53,7 @@ export const PostEditor = ({ post, onSave }: Props) => {
         apiKey={process.env.NEXT_PUBLIC_TINY_MCE_KEY}
         onInit={(_evt, editor) => (editorRef.current = editor)}
         onBlur={handleBlur}
-        initialValue={post?.decodedContent || sessionStorage.getItem('tinymce') || ''}
+        initialValue={post?.decodedContent || ''}
         init={{
           height: 550,
           width: '100%',

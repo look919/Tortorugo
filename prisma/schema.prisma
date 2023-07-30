@@ -13,12 +13,10 @@ datasource db {
 
 model Post {
     id              String  @id @default(cuid())    
-    authorId        String
     createdAt       DateTime @default(now())
 
     title           String
     decodedContent  String  @db.Text
-    encodedContent  String  @db.Text 
     categories      Category[]
     referencesCount Int     @default(0)
 }

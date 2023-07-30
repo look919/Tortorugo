@@ -1,21 +1,51 @@
 import { db } from '@lib/db';
 import { ClosedPost } from './ClosedPost';
 import { FilterPosts } from './FilterPosts';
+import { Post } from '@prisma/client';
 
 type Props = {
-  searchParams: { categories: string[]; title: string };
+  searchParams: { categories: string[]; search: string };
 };
 
-export default async function HomePage({ searchParams }: Props) {
-  const posts = await db.post.findMany({
-    where: {
-      title: searchParams.title ? { contains: searchParams.title } : undefined,
-      categories: searchParams.categories?.length ? { some: { id: { in: searchParams.categories } } } : undefined,
-    },
+interface SearchParams {
+  search?: string;
+  categories?: string[];
+}
+
+type WhereConditions = {
+  OR?: {
+    title?: { contains: string };
+    decodedContent?: { contains: string };
+  }[];
+  categories?: { some: { id: { in: string[] } } };
+};
+
+async function getPosts(searchParams: SearchParams): Promise<Post[]> {
+  const whereConditions: WhereConditions = {};
+
+  if (searchParams.search) {
+    whereConditions.OR = [
+      { title: { contains: searchParams.search } },
+      { decodedContent: { contains: searchParams.search } },
+    ];
+  }
+
+  if (searchParams.categories?.length) {
+    whereConditions.categories = { some: { id: { in: searchParams.categories } } };
+  }
+
+  const posts: Post[] = await db.post.findMany({
+    where: whereConditions,
     orderBy: {
       createdAt: 'desc',
     },
   });
+
+  return posts;
+}
+
+export default async function HomePage({ searchParams }: Props) {
+  const posts = await getPosts(searchParams);
 
   const categories = await db.category.findMany({
     where: {
