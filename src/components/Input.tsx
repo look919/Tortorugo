@@ -11,6 +11,11 @@ type Props = {
 
 export const Input = ({ inputRef, ...props }: Props) => {
   return (
-    <input ref={inputRef} type='text' className='mb-4 w-full bg-slate-950 p-2 text-center outline-none' {...props} />
+    <input
+      ref={inputRef}
+      type='text'
+      className='mb-4 w-full border-slate-600 bg-slate-950 p-2 text-center outline-none focus:border'
+      {...props}
+    />
   );
 };

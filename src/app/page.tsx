@@ -2,6 +2,7 @@ import { db } from '@lib/db';
 import { ClosedPost } from './ClosedPost';
 import { FilterPosts } from './FilterPosts';
 import { Post } from '@prisma/client';
+import { Separator } from '@components/Separator';
 
 type Props = {
   searchParams: { categories: string[]; search: string };
@@ -56,10 +57,12 @@ export default async function HomePage({ searchParams }: Props) {
   return (
     <section className='w-full'>
       <FilterPosts categories={categories} />
+      <div className='md:-mx-8'>
+        <Separator className='mb-12' />
+      </div>
       <div className='w-full'>
         {posts.length > 0 ? (
           <>
-            <div className='mb-8 border-b md:-mx-8' />
             {posts.map((post, postIndex) => (
               <ClosedPost key={post.id} post={post} isIndexEven={postIndex % 2 === 0} />
             ))}

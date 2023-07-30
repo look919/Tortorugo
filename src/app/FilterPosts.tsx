@@ -74,7 +74,7 @@ export const FilterPosts = ({ categories }: Props) => {
   };
 
   return (
-    <div className='-mt-4 mb-4 flex flex-col items-center justify-center'>
+    <div className='-mt-4 flex flex-col items-center justify-center'>
       <button
         onClick={() => setFiltersVisible(prevState => !prevState)}
         className='flex w-fit items-center rounded-lg bg-sky-700 px-4 py-1 text-sm'

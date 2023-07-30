@@ -12,8 +12,8 @@ export default function NewPostPage() {
   }
 
   return (
-    <>
+    <section className='flex w-full flex-col'>
       <PostEditor onSave={createPost} />
-    </>
+    </section>
   );
 }
