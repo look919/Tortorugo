@@ -18,5 +18,6 @@ export type FormPost = {
   authorId: string;
   referencesCount: number;
   newPostCategories?: NewPostCategory[];
+  isPrivate: boolean;
   postId?: string;
 };

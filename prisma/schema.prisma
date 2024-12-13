@@ -1,31 +1,37 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
 model Post {
-    id              String  @id @default(cuid())    
-    authorId        String 
-    createdAt       DateTime @default(now())
-
-    title           String
-    decodedContent  String  @db.Text
-    categories      Category[]
-    referencesCount Int     @default(0)
+  id              String     @id @default(cuid())
+  authorId        String
+  createdAt       DateTime   @default(now())
+  title           String
+  decodedContent  String     @db.Text
+  referencesCount Int        @default(0)
+  isPrivate       Boolean    @default(false)
+  categories      Category[]
 }
 
 model Category {
-    id          String  @id @default(cuid())
-    name        String
-    color       String
-    filterable  Boolean @default(true)
-    posts       Post[]
+  id         String  @id @default(cuid())
+  name       String
+  color      String
+  filterable Boolean @default(true)
+  posts      Post[]
+}
+
+model CategoryToPost {
+  A String
+  B String
+
+  @@unique([A, B], map: "_CategoryToPost_AB_unique")
+  @@index([B], map: "_CategoryToPost_B_index")
+  @@map("_CategoryToPost")
 }

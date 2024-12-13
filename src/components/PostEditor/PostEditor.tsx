@@ -48,6 +48,7 @@ export const PostEditor = ({ state, categories, post, onSave }: Props) => {
     const postId = await onSave({
       authorId: auth.user.id,
       title,
+      isPrivate: true,
       referencesCount: parseInt(referencesCount, 10),
       content: editorRef.current.getContent(),
       newPostCategories: state === 'creator' ? categoriesState : undefined,

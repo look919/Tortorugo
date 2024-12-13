@@ -3,11 +3,19 @@
 import { db } from '@lib/db';
 
 export const getRandomPost = async () => {
-  const totalPosts = await db.post.count();
-  const randomIndex = Math.floor(Math.random() * totalPosts);
+  const totalPublicPosts = await db.post.count({
+    where: {
+      isPrivate: false,
+    },
+  });
+
+  const randomIndex = Math.floor(Math.random() * totalPublicPosts);
 
   const randomPost = await db.post
     .findMany({
+      where: {
+        isPrivate: false, // Ensure only public posts are considered
+      },
       skip: randomIndex,
       take: 1,
       include: {

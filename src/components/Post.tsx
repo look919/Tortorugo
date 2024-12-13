@@ -15,7 +15,7 @@ export const Post = ({ post }: Props) => {
   return (
     <>
       <section className='relative w-full bg-gradient-to-r from-gray-700 to-slate-800 transition-all md:rounded-lg'>
-        <PostCreatedAt createdAt={post.createdAt} />
+        <PostCreatedAt createdAt={post.createdAt} withTime />
         <div className='mx-1 mb-6 mt-3 flex items-center justify-between border-b p-2 text-center text-lg'>
           <h4>{post.title}</h4>
           <Link href='/'>
