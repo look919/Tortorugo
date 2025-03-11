@@ -14,7 +14,7 @@ export const ClosedPost = ({ post, isIndexEven }: Props) => {
       <section
         className={twMerge(
           'relative mb-8 w-full from-gray-700 to-slate-800 transition-all md:rounded-xl',
-          isIndexEven ? 'bg-gradient-to-tr' : 'bg-gradient-to-bl',
+          isIndexEven ? 'bg-gradient-to-l' : 'bg-gradient-to-r',
         )}
       >
         <PostCreatedFormNow createdAt={post.createdAt} />

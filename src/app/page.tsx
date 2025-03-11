@@ -6,54 +6,47 @@ import { Separator } from '@components/Separator';
 import { currentUser } from '@clerk/nextjs/server';
 
 type Props = {
-  searchParams: { categories: string[]; search: string };
+  searchParams: { categories: string; search: string };
 };
 
 interface SearchParams {
   search?: string;
-  categories?: string[];
+  categories?: string;
 }
 
 type WhereConditions = {
-  OR?: {
-    title?: { contains: string };
-    content?: { contains: string };
-  }[];
-  categories?: { some: { id: { in: string[] } } };
-  AND?: {
-    isPrivate: {
-      equals: boolean;
-    };
-  };
+  OR?: { title?: { contains: string; mode: 'insensitive' }; content?: { contains: string; mode: 'insensitive' } }[];
+  AND?: Array<{ isPrivate?: { equals: boolean } } | { categories: { some: { id: string } } }>;
 };
-
 async function getPosts(searchParams: SearchParams, isAuthenticatedUserAnAdmin: boolean): Promise<Post[]> {
-  const whereConditions: WhereConditions = isAuthenticatedUserAnAdmin
-    ? {}
-    : {
-        AND: {
-          isPrivate: {
-            equals: false,
-          },
-        },
-      };
+  const whereConditions: WhereConditions = {};
+
+  if (!isAuthenticatedUserAnAdmin) {
+    whereConditions.AND = [{ isPrivate: { equals: false } }];
+  }
 
   if (searchParams.search) {
-    whereConditions.OR = [{ title: { contains: searchParams.search } }, { content: { contains: searchParams.search } }];
+    whereConditions.OR = [
+      { title: { contains: searchParams.search, mode: 'insensitive' } },
+      { content: { contains: searchParams.search, mode: 'insensitive' } },
+    ];
   }
 
-  if (searchParams.categories?.length) {
-    whereConditions.categories = { some: { id: { in: searchParams.categories } } };
+  if (searchParams.categories) {
+    const categoriesArray = searchParams.categories.split(',');
+
+    whereConditions.AND = [
+      ...(whereConditions.AND || []),
+      ...categoriesArray.map(categoryId => ({
+        categories: { some: { id: categoryId } },
+      })),
+    ];
   }
 
-  const posts: Post[] = await db.post.findMany({
+  return db.post.findMany({
     where: whereConditions,
-    orderBy: {
-      createdAt: 'desc',
-    },
+    orderBy: { createdAt: 'desc' },
   });
-
-  return posts;
 }
 
 export default async function HomePage({ searchParams }: Props) {
@@ -63,6 +56,9 @@ export default async function HomePage({ searchParams }: Props) {
   const categories = await db.category.findMany({
     where: {
       filterable: true,
+    },
+    orderBy: {
+      name: 'asc',
     },
   });
 
