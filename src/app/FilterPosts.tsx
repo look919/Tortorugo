@@ -65,7 +65,10 @@ const iconClassName = 'h-5 w-5';
 
 export const FilterPosts = ({ categories }: Props) => {
   const router = useRouter();
-  const [filtersVisible, setFiltersVisible] = useState(false);
+  const searchParams = useSearchParams();
+  const [filtersVisible, setFiltersVisible] = useState(
+    Boolean(searchParams.get('categories') || searchParams.get('search')),
+  );
   const { filters, handleChangeSearch, handleCategoriesChange } = useFilters(categories);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
