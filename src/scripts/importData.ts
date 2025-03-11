@@ -18,13 +18,13 @@ const prisma = new PrismaClient();
 const data: Data = JSON.parse(readFileSync('data.json', 'utf-8'));
 
 async function importData() {
-  console.log('Inserting categories...');
+  console.info('Inserting categories...');
   await prisma.category.createMany({ data: data.categories });
 
-  console.log('Inserting posts...');
+  console.info('Inserting posts...');
   await prisma.post.createMany({ data: data.posts });
 
-  console.log('Inserting category-post relations...');
+  console.info('Inserting category-post relations...');
   for (const relation of data.categoryToPost) {
     try {
       await prisma.$executeRawUnsafe(
@@ -32,12 +32,12 @@ async function importData() {
         relation.A,
         relation.B,
       );
-    } catch (err) {
-      console.log(err);
+    } catch (err: unknown) {
+      console.error(err);
     }
   }
 
-  console.log('Import complete!');
+  console.info('Import complete!');
 }
 
 importData().catch(console.error);

@@ -12,7 +12,7 @@ module.exports = {
     '@typescript-eslint/no-unnecessary-type-assertion': 1,
     complexity: [2, { max: 18 }],
     'import/no-extraneous-dependencies': 0,
-    'no-console': [2, { allow: ['error', 'warn'] }],
+    'no-console': [2, { allow: ['error', 'warn', 'info'] }],
     'no-param-reassign': [2, { props: true, ignorePropertyModificationsForRegex: ['Ref$'] }],
     'prefer-const': 2,
     'react/jsx-filename-extension': [2, { extensions: ['.tsx'] }],
