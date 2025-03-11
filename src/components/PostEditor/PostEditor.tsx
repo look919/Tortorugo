@@ -74,7 +74,7 @@ export const PostEditor = ({ state, categories, post, onSave }: Props) => {
         defaultValue={post?.title || ''}
       />
 
-      <TinyMceEditor editorRef={editorRef} initialValue={post?.decodedContent} />
+      <TinyMceEditor editorRef={editorRef} initialValue={post?.content} />
       <div className='md:-mx-8'>
         <Separator className='my-6' />
       </div>

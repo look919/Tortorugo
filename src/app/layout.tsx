@@ -3,7 +3,7 @@ import { Poppins } from 'next/font/google';
 import Link from 'next/link';
 import { RandomPostLinkButton } from './RandomPostLinkButton';
 import './globals.css';
-import { ClerkProvider } from '@clerk/nextjs/app-beta'
+import { ClerkProvider } from '@clerk/nextjs/app-beta';
 import { UserProfile } from './UserProfile';
 
 const font = Poppins({ subsets: ['latin-ext'], weight: ['100', '400', '700'] });
@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <ClerkProvider>
       <html lang='en'>
         <body className={font.className}>
-          <div className='mx-auto flex min-h-screen max-w-2xl flex-col items-center bg-slate-900'>
+          <div className='mx-auto flex min-h-screen max-w-3xl flex-col items-center bg-slate-900'>
             <h1 className='my-4 text-center text-4xl font-thin tracking-wider'>Tortorugo</h1>
             <div className='m-4 mt-0'>
               <UserProfile />

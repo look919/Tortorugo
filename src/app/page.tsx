@@ -17,7 +17,7 @@ interface SearchParams {
 type WhereConditions = {
   OR?: {
     title?: { contains: string };
-    decodedContent?: { contains: string };
+    content?: { contains: string };
   }[];
   categories?: { some: { id: { in: string[] } } };
   AND?: {
@@ -39,10 +39,7 @@ async function getPosts(searchParams: SearchParams, isAuthenticatedUserAnAdmin: 
       };
 
   if (searchParams.search) {
-    whereConditions.OR = [
-      { title: { contains: searchParams.search } },
-      { decodedContent: { contains: searchParams.search } },
-    ];
+    whereConditions.OR = [{ title: { contains: searchParams.search } }, { content: { contains: searchParams.search } }];
   }
 
   if (searchParams.categories?.length) {

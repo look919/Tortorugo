@@ -10,7 +10,7 @@ export const editPost = async (data: FormPost) => {
     },
     data: {
       title: data.title,
-      decodedContent: data.content,
+      content: data.content,
       referencesCount: data.referencesCount,
       isPrivate: data.isPrivate,
     },

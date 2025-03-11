@@ -22,7 +22,7 @@ export const Post = ({ post }: Props) => {
             <ArrowUturnLeftIcon className='h-6 w-6 text-gray-400 hover:text-gray-200' />
           </Link>
         </div>
-        <ContentRenderer>{post.decodedContent}</ContentRenderer>
+        <ContentRenderer>{post.content}</ContentRenderer>
         {post.categories.length > 0 && <Categories categories={post.categories} />}
       </section>
     </>

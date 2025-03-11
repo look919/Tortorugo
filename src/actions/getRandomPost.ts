@@ -14,7 +14,7 @@ export const getRandomPost = async () => {
   const randomPost = await db.post
     .findMany({
       where: {
-        isPrivate: false, // Ensure only public posts are considered
+        isPrivate: false,
       },
       skip: randomIndex,
       take: 1,

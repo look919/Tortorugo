@@ -41,16 +41,16 @@ const StatsPage = async () => {
   };
 
   for (let i = 0; i < posts.length; i++) {
-    stats.averagePostLength += posts[i].decodedContent.length;
+    stats.averagePostLength += posts[i].content.length;
     stats.filteredCategoriesCount += posts[i].categories.filter(cat => !cat.filterable).length;
     stats.referencesCount += posts[i].referencesCount;
 
-    if (posts[i].decodedContent.length > stats.maxPostLength.length) {
-      stats.maxPostLength.length = posts[i].decodedContent.length;
+    if (posts[i].content.length > stats.maxPostLength.length) {
+      stats.maxPostLength.length = posts[i].content.length;
       stats.maxPostLength.title = posts[i].title;
     }
-    if (posts[i].decodedContent.length < stats.minPostLength.length) {
-      stats.minPostLength.length = posts[i].decodedContent.length;
+    if (posts[i].content.length < stats.minPostLength.length) {
+      stats.minPostLength.length = posts[i].content.length;
       stats.minPostLength.title = posts[i].title;
     }
 

@@ -9,7 +9,11 @@ const PostPage = async ({ params }: Props) => {
   const post = await db.post.findUnique({
     where: { id: params.id },
     include: {
-      categories: true,
+      categories: {
+        orderBy: {
+          filterable: 'desc',
+        },
+      },
     },
   });
 

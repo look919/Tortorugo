@@ -9,7 +9,7 @@ export const createPost = async (data: FormPost) => {
       title: data.title,
       authorId: 'test',
       referencesCount: data.referencesCount,
-      decodedContent: data.content,
+      content: data.content,
       isPrivate: data.isPrivate,
       categories: {
         connectOrCreate: data.newPostCategories!.map(category => ({
