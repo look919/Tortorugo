@@ -3,7 +3,6 @@ import { ClosedPost } from './ClosedPost';
 import { FilterPosts } from './FilterPosts';
 import { Post } from '@prisma/client';
 import { Separator } from '@components/Separator';
-import { currentUser } from '@clerk/nextjs/server';
 
 type Props = {
   searchParams: { categories: string; search: string };
@@ -18,12 +17,8 @@ type WhereConditions = {
   OR?: { title?: { contains: string; mode: 'insensitive' }; content?: { contains: string; mode: 'insensitive' } }[];
   AND?: Array<{ isPrivate?: { equals: boolean } } | { categories: { some: { id: string } } }>;
 };
-async function getPosts(searchParams: SearchParams, isAuthenticatedUserAnAdmin: boolean): Promise<Post[]> {
+async function getPosts(searchParams: SearchParams): Promise<Post[]> {
   const whereConditions: WhereConditions = {};
-
-  if (!isAuthenticatedUserAnAdmin) {
-    whereConditions.AND = [{ isPrivate: { equals: false } }];
-  }
 
   if (searchParams.search) {
     whereConditions.OR = [
@@ -50,9 +45,7 @@ async function getPosts(searchParams: SearchParams, isAuthenticatedUserAnAdmin: 
 }
 
 export default async function HomePage({ searchParams }: Props) {
-  const user = await currentUser();
-  const isAuthenticatedUserAnAdmin = user?.privateMetadata.role === 'admin';
-  const posts = await getPosts(searchParams, isAuthenticatedUserAnAdmin);
+  const posts = await getPosts(searchParams);
   const categories = await db.category.findMany({
     where: {
       filterable: true,
