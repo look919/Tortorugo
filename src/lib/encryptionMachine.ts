@@ -1,4 +1,4 @@
-import { EncryptionMachine } from 'encode-wir/dist';
+import { EncryptionMachine } from 'encode-wir';
 
 const encodedArray = process.env.NEXT_PUBLIC_ENCODED_ARRAY?.split('=') || [];
 
