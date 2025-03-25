@@ -33,8 +33,8 @@ dependencies:
     specifier: ^1.11.7
     version: 1.11.7
   encode-wir:
-    specifier: ^1.1.0
-    version: 1.1.0
+    specifier: ^1.1.1
+    version: 1.1.1
   eslint:
     specifier: 8.41.0
     version: 8.41.0
@@ -1820,8 +1820,8 @@ packages:
     resolution: {integrity: sha512-L18DaJsXSUk2+42pv8mLs5jJT2hqFkFE4j21wOmgbUqsZ2hL72NsUU785g9RXgo3s0ZNgVl42TiHp3ZtOv/Vyg==}
     dev: false
 
-  /encode-wir@1.1.0:
-    resolution: {integrity: sha512-I+GWKmn6JKvdamrGCzSPeh9a1lgMaTSFJGx2fPCHK5gEtuLgDqUGAvC+hhlzVA2Ij2y+lRK5UWr3FfmdzZbF+A==}
+  /encode-wir@1.1.1:
+    resolution: {integrity: sha512-dZwSphQCX9giWRLz4aqghua0cPuRj1pcyqdVqxJ9nNWjCtwoHk5ON0DE1lpJQf1w1Jp5vPcCL7+HTLsRkfw92g==}
     dev: false
 
   /enhanced-resolve@5.15.0:
